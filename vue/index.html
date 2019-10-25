@@ -4,8 +4,64 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title></title>
+		<script src="src/js/vue.js"></script>
 	</head>
 	<body>
-		
+		<div id="app">
+			<nav>
+				<mark>
+					
+				</mark>
+			</nav>
+		</div>
+			
+		<script>
+			
+			let vm = new Vue({
+				// el:document.getElementById('app'),
+				el:'#app',
+				data:{
+					list:[]
+				},
+				computed: {
+					// checkAll() {
+					// 	return this.list
+					// },
+					checkAll:{
+						get(){
+							return this.count
+						},
+						set(){
+							
+						}
+					},
+				},
+			})
+			
+			// vm.$set(target, key, value)
+			// vm.$delete(target,key)
+			// Object.defineProperty()
+			
+			/** 
+			 * 指令
+			 * v-bind  :  绑定数据
+			 * v-on  @  绑定事件
+			 * v-model 表单响应数据
+			 * 
+			 * v-for="item, index in arr" / v-for="item,key,index in object"
+			 * v-if
+			 * v-show
+			 * 
+			 * v-text
+			 * v-html  绑定可靠的html,否则容易受xss攻击  
+			 * 			（XSS攻击通常指的是通过利用网页开发时留下的漏洞，通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。
+			 * 			这些恶意网页程序通常是JavaScript，但实际上也可以包括Java、 VBScript、ActiveX、 Flash 或者甚至是普通的HTML。
+			 * 			攻击成功后，攻击者可能得到包括但不限于更高的权限（如执行一些操作）、私密网页内容、会话和cookie等各种内容。）
+			 * v-once  只执行一次
+			 * v-cloak  [v-cloak] { display: none;} 可以隐藏未编译的 Mustache 标签直到实例准备完毕。
+			 * 
+			 * */
+			
+		</script>
 	</body>
 </html>
