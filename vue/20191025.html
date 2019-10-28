@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// 1、深入理解Vue组件化机制
+			// 事件谁派发谁监听
+			/**
+			 * 兄弟组件之间的监听
+			 * this.$parent.$on
+			 * this.$parent.$emit
+			 * this.$root
+			 * 
+			 * provide/inject
+			 * 
+			 * 事件总线=>观察者模式 
+			 * 单独挂个全局的，所有人都可以去这个地方派发监听
+			 * 
+			 * */
+			 
+			 
+			 // 2/组件复合技术,插槽
+			 /**
+			  * <p><slot> </slot><p>
+			  * 
+			  * 具名插槽
+			  * <p><slot name="title"> </slot><p>
+			  * 
+			  * <div><template v-slot="title"></template></div>
+			  * 
+			  * 作用域插槽
+			  * 
+			  * */
+			  
+			  // 3/表单组件设计,例如elementui
+			  /**
+			   * form(容器、数据提交、全局校验，方便每个子项调用) => form-item(校验、显示错误) => input(数据收集)
+			   * 
+			   * 
+			   * 1、数据收集
+			   * 
+			   * 2、表单组织
+			   * 
+			   * 2、校验
+			   * npm sync-
+			   * */
+			   
+			   //
+			   /**
+				* 问题
+				* v-model和.sync(2.4出的新修饰符)的区别
+				* 作业
+				* 1、用Vue.extend创建组件
+				* 2、this.$parent的坑
+				* 
+				* */
+			  
+			
+		</script>
+		
+	</body>
+</html>
