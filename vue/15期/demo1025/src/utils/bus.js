@@ -1,7 +1,7 @@
 // 创建事件总线，像观察者模式
-// Bus:事件派发、监听、回调处理
+// Bus:事件派发、监听、回调处理  $emit, $on, $off 分别来分发、监听、取消监听事件
 export default class Bus {
-    // 构造器
+    // 构造函数
     constructor() {
         this.callbacks = {}
     }

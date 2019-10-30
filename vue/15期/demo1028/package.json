@@ -1,5 +1,5 @@
 {
-  "name": "demo1025",
+  "name": "demo1028",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -29,9 +29,7 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {
-      "no-console":0
-    },
+    "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
     }

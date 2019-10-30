@@ -23,7 +23,6 @@
             },
             prop:{
                 type:String,
-                default:''
             }
         },
         data(){
@@ -37,22 +36,25 @@
             this.$on('validate', () => {
                 this.validate()                
             })
+
         },
         methods: {
             // cnpm i async-validator -s  校验的第三方工具
             validate(){
                 // 0、获取校验規則和当前值
-                const rules = this.form.rules[this.prop]
-                const value = this.form.model[this.prop]
-                // 1、创建Schema实例
+                const rules = this.form.rules[this.prop]    //父组件provide到子组件inject的值
+                const value = this.form.model[this.prop]    //双向绑定先该表model的值,之后再派发事件
+                // 1、创建Schema实例,使用键值对模式
                 const schema = new Schema({
-                    // [xxx] es6计算属性
+                    // [xxx] es6计算属性,  key:校验規則, 最后都会转成es5代码
                     [this.prop]:rules
                 })
-                // 2、使用该实例进行创建
-                schema.validate({
+                // console.log(schema)
+                // 2、使用该实例进行创建  这里会返回一个promise,我们把这个promise结果返回给全局使用
+                return schema.validate({
                     [this.prop]:value
                 },errors => {
+                    // console.log('errors',errors)
                     if(errors){
                         this.error = errors[0].message
                     }else{

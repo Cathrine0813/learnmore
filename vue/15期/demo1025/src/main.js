@@ -1,7 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
+import Bus from './utils/bus'
+import Create from './utils/create'
+import emitter from "./mixins/emitter";
+
+import router from './router'
+// import store from './store'
+
 
 Vue.config.productionTip = false
+
+Vue.prototype.$bus = new Bus()
+Vue.prototype.$create = Create;
+Vue.mixin(emitter);//混入
+
 
 // 根组件
 new Vue({
@@ -9,5 +21,7 @@ new Vue({
   // data: {
   //   testRoot:'测试$root与vuex'
   // },
+  router, //配置router实例
+  // store,
   render: h => h(App),
 }).$mount('#app')
