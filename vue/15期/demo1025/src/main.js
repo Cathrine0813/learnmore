@@ -5,7 +5,7 @@ import Create from './utils/create'
 import emitter from "./mixins/emitter";
 
 import router from './router'
-// import store from './store'
+import store from './store'
 
 
 Vue.config.productionTip = false
@@ -22,6 +22,6 @@ new Vue({
   //   testRoot:'测试$root与vuex'
   // },
   router, //配置router实例
-  // store,
+  store,
   render: h => h(App),
 }).$mount('#app')

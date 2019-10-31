@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <Node :data="datas" :props="defaultProps" @nodeClick="handleNodeClick"></Node>
-        <!--<el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>-->
+    <div class="c-tree">
+        <Node :data="datas" :props="defaultProps"></Node>
     </div>
 </template>
 
@@ -9,6 +8,7 @@
     /* eslint-disable */
     import Node from './Node'
     export default {
+        name:'CTree',
         data () {
             return {
                 datas:{

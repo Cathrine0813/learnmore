@@ -12,30 +12,33 @@
 
     <!--20191025组件-->
     <!--模拟element表单组件-->
-    <c-form></c-form>
+    <!--<c-form></c-form>-->
 
     <!--用递归recursion思想创建组件-->
-    <c-tree></c-tree>
+    <!--<c-tree
+      :data="treeData"
+      :props="treeProps"
+      @node-click="handleNodeClick"></c-tree>-->
 
 
-    <img alt="Vue logo" src="./assets/logo.png">
+    <!--<img alt="Vue logo" src="./assets/logo.png">-->
     <!-- 1: 父子通讯-->
-    <HelloWorld 
+    <!--<HelloWorld 
       msg="父子组件通讯"
       attrtest="$attrs测试"
       ref="childref"
       @myclick="onMyclick($event,'粑粑')"
-    />
+    />-->
 
     <!-- 2: 兄弟组件通讯：$parent,$root-->
-    <HelloWorld 
+    <!--<HelloWorld 
       msg="兄弟组件通讯"
-    />
+    />-->
 
     <!-- 3: 祖先与后代通讯：provide/inject祖先给后代传值,没有后代给祖先传
         $dispatch向上通讯 
         $boardcast向下通讯 -->
-    <my-father></my-father>
+    <!--<my-father></my-father>-->
 
     <!--任意两个组件中间：
         1、事件总线(创建一个总线负责派发、监听、回调事件，例如观察者模式,$emit, $on, $off 分别来分发、监听、取消监听事件)
@@ -62,7 +65,7 @@
       <!--<template v-slot:wantdata="{newData}">2、{{newData}}</template>-->
     </SlotTest>
 
-    <Communicate></Communicate>
+    <!--<Communicate></Communicate>-->
   </div>
 </template>
 
@@ -86,6 +89,15 @@ export default {
       son:'grandefather to son',
     }
   },
+  data () {
+    return {
+      treeData:[{
+
+      },{
+
+      }]
+    }
+  },
   components: {
     HelloWorld,
     myFather,
@@ -96,7 +108,7 @@ export default {
   },
   mounted () {
     // this.$ref['childref'].refTest 
-    this.$refs.childref.refTest = '父组件使用ref改变子组件的值';
+    // this.$refs.childref.refTest = '父组件使用ref改变子组件的值';
 
     // 使用$children（数组）访问自定义子组件，但是子组件实例的顺序是无法保证的,有的组件可能是异步的，是需要时间才渲染出来，
     // this.$children[0].refTest = '父组件使用$children改变子组件的值';

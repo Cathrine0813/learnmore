@@ -54,6 +54,7 @@ class CRouter{
         window.addEventListener('hashchange',this.onHashchange.bind(this))
     }
     onHashchange() { 
+        console.log('path:',window.location.hash)
         // 作用:修改this.app中的current  slice(1)截取#号后面的部分
         this.app.current = window.location.hash.slice(1)||'/'
     }
@@ -73,32 +74,51 @@ class CRouter{
 
         // 转换目标<a herf="/">xxx</a>
         // <router-link to=""></router-link>
-        Vue.Component('router-link', {
+        Vue.component('router-link', {
             props: {
                 to:String
             },
+
+            // 不能使用template和el，因为使用了render,要了解vue初始化代码，template和el只存在于render不在的情况下，render是vue2出的，vue1时可以使用template和el
+            // template: '<a></a>',
+            // el:'#app',
+
+
             // 渲染函数
             render(h) {
                 // 9.3.1使用createElement韩式
                 // //h(tag, data, children) (String, Object, Array)
-                // return h('a', {
-                //     // 设置特性要用attrs
-                //     attrs: {
-                //         herf:'#'+this.to //因为我们现在实现的是hash模式路由跳转
-                //     }
-                // },[this.$slots.default]) //将a标签包裹的内容用插槽实现,内容相对于a来说是子元素,所以可以用插槽实现,  this.$slots.default默认插槽
+                return h('a', {
+                    // 设置特性要用attrs
+                    attrs: {
+                        href:'#'+this.to //因为我们现在实现的是hash模式路由跳转
+                    }
+                },[this.$slots.default]) //将a标签包裹的内容用插槽实现,内容相对于a来说是子元素,所以可以用插槽实现,  this.$slots.default默认插槽
 
                 // 9.3.2使用JSX,react, 但是之后loader还是会转换成9.3.1,现在是因为cli3做好了配置所以我们现在才能用jsx
-                return <a href={'#' + this.to}>{this.$slots.default}</a>
+                // return <a href={'#' + this.to}>{this.$slots.default}</a>
             }
         })
 
-        Vue.Component('router-view', {
-            render(h) {
-                return h()
+        Vue.component('router-view', {
+            // bug this指向错误，这里的this指向组件实例对象，不是CRouter，访问不了routeMap
+            // render(h) {
+            //     // 把当前地址的component拿出来  (component: Home import Home from './views/Home.vue')
+            //     const Component = this.routeMap[this.app.current].component
+            //     return h(Component)
+            // }
 
+            // 解决方案1：改用箭头函数，这样子这里的this就是该作用域上下文(CRouter)的this,这样就能取到routeMap\app... 
+            render: (h) => {
+                const Component = this.routeMap[this.app.current].component
+                return h(Component)
             }
+
+            // 解决方案2：函数式组件
         })
+
+        // ps:只要组件内Vue.component的render函数里面使用到某个响应式的数据(例如this.app.current),只要这个响应式数据发生变化，那么这个组件将重新执行render函数，所以组件的内容就会刷新
+        //  （依赖收集：render中使用到vue.data里的数据，就会产生依赖，所以程序在执行render时就会执行一次依赖收集的过程，只要依赖的数据发生改变，与这个依赖相关的组件都会更新）
     }
 }
 
