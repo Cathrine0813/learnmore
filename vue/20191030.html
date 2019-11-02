@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/**
+			 * 
+			 * Compiler:编译器
+			 * 遍历模板，分析哪里使用了data中的key以及事件等指令（v-开头、@开头）
+			 * 这时认为一个依赖一个watcher实例，使界面中的DOM更新函数和key
+			 * 挂钩，如果更新了key，则执行这个函数
+			 * 
+			 * 获取dom => 执行编译（循环子元素，判断节点类型：节点nodeName/插值文本textContent，递归判断子元素）
+			 * 
+			 * 节点 node.nodeType = 1
+			 * 文本 node.nodeType = 3  插值/\{\{(.*)\}\}/  RegExp.$1
+			 *    
+			 * 
+			 * 
+			 * */
+		</script>
+	</body>
+</html>

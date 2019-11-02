@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/**
+			 * 
+			 * object.defineProperty是对象方法，所以里面的get、set对数组没有
+			 * 
+			 * vue1主要依赖watcher:  一个数据依赖一个watcher
+			 * vue2才引入虚拟DOM: 把watcher粒度变小，一个组件一个watcher
+			 * 
+			 * 与react响应数据的区别
+			 *  react是主动的
+			 * 	vue是被动通知
+			 * 
+			 * 
+			 * runtime运行时：运行在web还是移动端
+			 * render>template>el
+			 * dispatch真正将虚拟DOM转成正式DOM
+			 * 
+			 * 调试源码
+			 * 	术语
+			 * 1、common:nodejs模块cjs，旧版打包器webpacl1,brower
+			 * 2、esm:es模块化规范，常用于webpack2.0+
+			 * 3、umd: amd规范，常用于浏览器
+			 * 4、runtime：说明输出仅有核心运行时的运行代码
+			 * 
+			 * 
+			 * 整体流程
+			 * 
+			 * 
+			 * 数据响应式
+			 * mvvm框架最大特点：数据响应式
+			 * 	对象响应式：Object。defineProperty()
+			 * 	数组响应式：
+			 * 
+			 * initsate() 
+			 * observer根据传入的数据（数组/对象）
+			 * 
+			 * 
+			 * 
+			 * 
+			 *  ctrl+T 搜索方法
+			 * 
+			 * 
+			 * 作业：
+			 * 1、思维导图
+			 * 2、Vue.set/delete
+			 * 3、异步更新的实现
+			 * */
+		</script>
+	</body>
+</html>
