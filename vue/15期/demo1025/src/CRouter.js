@@ -109,12 +109,28 @@ class CRouter{
             // }
 
             // 解决方案1：改用箭头函数，这样子这里的this就是该作用域上下文(CRouter)的this,这样就能取到routeMap\app... 
-            render: (h) => {
-                const Component = this.routeMap[this.app.current].component
+            // render: (h) => {
+            //     const Component = this.routeMap[this.app.current].component
+            //     return h(Component)
+            // }
+
+            // 解决方案2：函数式组件,react也有该概念。该组件只负责渲染，不负责业务逻辑和数据的获取...，所以router-view是函数式组件的典型例子
+            // 源码： https://github.com/vuejs/vue-router/blob/dev/src/components/view.js
+            functional: true,
+            // render(目标，上下文)
+            render(h, { parent }) {
+                const router = parent.$router;//获取父组件的$router
+                // 这里的this指的是router-view这个组件实例
+                const Component = router.routeMap[router.app.current].component
+
+                // 嵌套路由的解决方法<router-view>...<router-view></router-view>....</router-view>,源码26行，向上递归
+
+
                 return h(Component)
             }
 
-            // 解决方案2：函数式组件
+
+            // 解决方案3：this.$router.app
         })
 
         // ps:只要组件内Vue.component的render函数里面使用到某个响应式的数据(例如this.app.current),只要这个响应式数据发生变化，那么这个组件将重新执行render函数，所以组件的内容就会刷新

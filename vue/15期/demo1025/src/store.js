@@ -31,12 +31,12 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           // 添加业务逻辑
-          // if (getters.left > 0) {
+          if (getters.left > 0) {
             commit("increment");
             resolve();
             return;
-          // }
-          // reject();
+          }
+          reject();
         }, 1000);
       });
     },

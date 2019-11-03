@@ -26,7 +26,8 @@ class Store{
 
         this.mutations = options.mutations
         this.actions = options.actions
-        // this.getters = options.getters
+        
+        options.getters && this.handleGetters(options.getters); //如果有getters，就执行handleGetters方法
 
         // 事件this指向绑定,因为在执行过程中this容易丢失，函数中调函数上下文丢失
         this.commit = this.commit.bind(this)
@@ -41,6 +42,21 @@ class Store{
     dispatch(type, arg) {
         const store = this //当前实例上下文，方便解构获取各个方法
         return this.actions[type](store,arg)
+    }
+
+    // getters
+    handleGetters(getters) {
+        this.getters = {} //定义this.getters，只读形式
+
+        // 遍历getters选项，为this.getters定义property
+        Object.keys(getters).forEach(key => {
+            // 只定义get函数，保证只读性
+            Object.defineProperty(this.getters, key, {
+                get: () => {    //箭头函数，保持this依旧是store
+                    return getters[key](this.state)
+                }
+            })
+        })
     }
 
 
