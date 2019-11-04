@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title></title>
+    </head>
+    <body>
+        <div id="app">
+            {{test}}
+            <p c-text="test"></p>
+            <p c-html="html"></p>
+            <p>
+                <input type="text" c-model="test">
+            </p>
+            <p>
+                <button @click="onClick">按钮</button>
+            </p>
+        </div>
+        
+        <script src="cvue.js"></script>
+        <script src="compiler.js"></script>        
+        <script>
+            const o = new CVue({
+                el: "#app",
+                data: {
+                    test: "allala",
+                    foo: { bar: "bar" },
+                    html: '<button>adfadsf</button>'
+                },
+                created () {
+                  console.log(1111)
+                  setTimeout(()=>{
+                      console.log(2222)
+                  },1000)  
+                },
+                methods: {
+                    onClick() {
+                        alert('blabla')
+                    }
+                },
+            });
+            // console.log(o.$data.test);
+            // o.$data.test = "hello,kvue!";
+            // console.log(o.$data.test);
+
+            // console.log(o.$data.foo.bar);
+            // o.$data.foo.bar = "hello,kvue!";
+            // console.log(o.$data.foo.bar);
+        </script>
+
+        <!--<script>
+            // cvue
+            const app = new CVue({
+                data:{
+                    test:'测试属性',
+                    foo:{
+                        bar:'bar'
+                    }
+                }
+            })
+            // $只是内部变量定义，闭包
+            // app.$data.test = '测试属性改变啦'
+            // app.$data.foo.bar = 'bar更新啦'
+            // 简化，需要实现代理proxy,对$data进行访问代理
+            app.test = '测试属性改变啦'
+            app.foo.bar = 'bar更新啦'
+
+            // console.log(app.test)
+        </script>-->
+
+
+        <!--<div id="app">
+            <p>腻害，<span id="name"></span></p>
+        </div>-->
+        <script>
+            /**
+             * Vue运行机制：
+             * 
+             * 1、初始化流程：（最重要 $mount => render => patch）
+             * new Vue() 时执行一个init方法（初始化data、prop、事件等）初始化，还会派发两个生命周期钩子（beforeCreate,create），之后就可以得到vue实例
+             * 
+             * 之后就执行挂载$mount(),作用是计算虚拟DOM,计算出当前页面中的js对象，来描述整个页面的DOM结构,但是是虚拟DOM，虚拟DOM的获取是渲染函数render函数执行的
+             * 
+             * 执行更新函数中的patch()打补丁函数，把虚拟DOM变成真实DOM的映射工作，之后就产生真实DOM
+             * 
+             *      webpack中用vue-loader加载器来执行编译过程，所以我们平常写的template其实是在定义render函数
+             *      compile()编译过程其实是将template转成render函数,在$mount之后执行，所以它执不执行取决于我们当前的运行环境
+             *          1、带运行时编译：在浏览器中直接引入了带编译器的vue.js,那么就可以直接写带字符串的模板template，之后可以在浏览器中实时编译
+             *          2、webpack预编译环境（不带运行时版本）：打包前把template编译好，所以程序运行时render函数已经存在了，不用实时编译过程
+             * 
+             * 
+             * 2、更新过程：
+             * 初始化后在render函数执行后会触发touch事件，数据拦截defineProperty,
+             * 
+             * 当数据发生访问getter时，vue会创建一个watcher观察者，会建立当前访问属性和刚刚的render函数一个对应关系,当以后有人setter改变这个属性时watcher会执行一下render对应的部分
+             * 
+             * （update时）之后就会执行patch(),这里就涉及到diff算法
+             * 
+             * 
+             * diff算法（核心部分）：当更新时会计算出一个新的虚拟DOM,之后和初始化计算出来的虚拟DOM进行对比，对比出变化的地方，之后只做变化了的地方的更新操作（提高效率），批量把这些变化一起执行
+             * 
+             * 
+             * 
+             * 今天目标：
+             * 1、实现数据响应式
+             * 2、实现简单的编译器，执行依赖收集的工作
+             * 
+             * 
+             * 
+             * 
+             * vue2响应式原理：核心Object.defineProperty
+             * 
+            */
+
+            // var obj = {};
+            // // 定义数据劫持 (target, prop, (get(),set()))
+            // Object.defineProperty(obj, 'name', {
+            //     get(){
+            //         console.log('获取name')
+            //         return document.querySelector('#name').innerHTML;
+            //     },
+            //     set(nick){
+            //         console.log('设置name')
+            //         document.querySelector('#name').innerHTML = nick
+            //     }
+            // })
+            // obj.name = 'Cathrine'
+            // console.log(obj.name)
+        </script>
+    </body>
+</html>
