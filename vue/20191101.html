@@ -9,25 +9,26 @@
 			/**
 			 * 
 			 * object.defineProperty是对象方法，所以里面的get、set对数组没有
+			 * 数组通过7个改变原数组的方法，去拦截数组，再做通知更新，之后还结合$set\$delete
 			 * 
-			 * vue1主要依赖watcher:  一个数据依赖一个watcher
-			 * vue2才引入虚拟DOM: 把watcher粒度变小，一个组件一个watcher
+			 *  *vue1主要依赖watcher:  一个数据依赖一个watcher
+			 *  *vue2才引入虚拟DOM: 把watcher粒度变小，一个组件一个watcher(问题：当组件内有一个数据变了，watcher不知道，所以引入了虚拟DOM，把上一次变化和这一次变化做比对)
 			 * 
 			 * 与react响应数据的区别
-			 *  react是主动的
-			 * 	vue是被动通知
+			 *  	react是主动的(数据改变主动去通知)
+			 * 		vue是被动通知(对数据拦截，set的时候才通知我那个数据变了)
 			 * 
 			 * 
-			 * runtime运行时：运行在web还是移动端
+			 * runtime运行时：运行环境，运行在web还是移动端
 			 * render>template>el
 			 * dispatch真正将虚拟DOM转成正式DOM
 			 * 
-			 * 调试源码
+			 * dist调试源码
 			 * 	术语
-			 * 1、common:nodejs模块cjs，旧版打包器webpacl1,brower
-			 * 2、esm:es模块化规范，常用于webpack2.0+
-			 * 3、umd: amd规范，常用于浏览器
-			 * 4、runtime：说明输出仅有核心运行时的运行代码
+			 * 1、common:nodejs模块cjs(commonjs)，运行在旧版打包器webpacl1,browserify
+			 * 2、esm:es模块化规范，常用于webpack2+，（多半不带编译器）
+			 * 3、umd: (像vue.js直接输出的，带编译器)universal module definition，是一种兼容格式(cjs、前端amd规范) ，可运用于后台，常用于浏览器
+			 * 4、runtime：说明输出的库仅有核心运行时代码，没有编译器
 			 * 
 			 * 
 			 * 整体流程
@@ -51,6 +52,30 @@
 			 * 1、思维导图
 			 * 2、Vue.set/delete
 			 * 3、异步更新的实现
+			 * 
+			 * 
+			 * 一、vue源码文件目录
+			 * dist:最终产生的文件，分别运行在不同的运行时里
+			 * examples:官方准备的案例
+			 * flow:vue1.0用flow语言编写的，类似ts,是一种强类型的编译语言，有类型声明文件
+			 * packages:独立的包，例如服务端的渲染器，和vue核心功能有区分
+			 * scripts:存放的是打包的脚本，打包配置，根目录入口文件的查找和这个文件夹息息相关
+			 * src:核心代码存放的地方
+			 * 		最重要的是compiler编译器、core核心代码(通用)、platforms平台特有代码(web浏览器、weex移动端)
+			 * 		server(h和服务端相关的东西，例如渲染器、webpack插件)
+			 * 		sfc单文件解析器
+			 * 		shared共享代码
+			 * test:测试文件
+			 * types:用ts编写的一套
+			 * 
+			 * 二、
+			 * 安装rollup: npm i -g rollup 打包工具，常用于纯js编写的文件
+			 * 输出的代码添加sourcemap:这样才能在调试的时候看到源码，和源码文件对应起来（之后会生成一个map文件 ）
+			 * 
+			 * 三、
+			 * "dev": "rollup -w -c scripts/config.js --sourcemap --environment TARGET:web-full-dev",
+			 * -c后面带的是scripts/config.js入口文件，输出目标是web-full-dev
+			 * 
 			 * */
 		</script>
 	</body>

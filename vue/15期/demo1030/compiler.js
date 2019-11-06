@@ -62,15 +62,34 @@ class Compiler{
                 // 执行相应的更新函数
                 this[dir] && this[dir](node, exp)
             }
+			
+			// 事件处理 @ 
+			if(this.isEvent(attrName)){
+				//@onclick = 'onclick'
+				const dir = attrName.substring(1)//click
+				this.eventHandler(node,exp,dir) // exp:onClick的回调函数
+			}
         })
     }
     isDirective(attr) {
         return attr.indexOf('c-') == 0;
     }
+	// c-text
     text(node, exp) {
         this.update(node, exp, 'text')
     }
-
+	// c-html
+	html(node, exp){
+		this.update(node, exp, 'html')
+	}
+	// c-model (表单 value input、checked change)
+	model(node, exp){
+		this.update(node, exp, 'model')
+		// 事件监听
+		node.addEventListener('input', e =>{
+			this.$vm[exp] = e.target.value
+		})
+	}
 
     isInter(node) {
         return node.nodeType === 3 && /\{\{(.*)\}\}/.test(node.textContent)
@@ -81,6 +100,9 @@ class Compiler{
         this.update(node,RegExp.$1,'text')
     }
 
+	isEvent(attr){
+		return attr.indexOf('@') == 0;
+	}
 
     // update函数：负责更新DOM,同时创建watcher实例，在两者中间挂钩
     //node操作节点 exp表达式 dir指令（v-model...）
@@ -100,4 +122,21 @@ class Compiler{
     textUpdater(node, value) {
         node.textContent = value;
     }
+	htmlUpdater(node, value) {
+	    node.innerHTML = value;
+	}
+	modelUpdater(node, value) {
+	    node.value = value;
+	}
+	
+	eventHandler(node, exp, dir){
+		// 找到对应在methods定义的函数
+		const fn = this.$vm.$options.methods && this.$vm.$options.methods[exp]
+		if(fn){
+			//如果事件存在，就监听这个事件dir
+			// fn.bind(this.$vm)将用户事件的上下文改指向该实例
+			node.addEventListener(dir, fn.bind(this.$vm))  
+		}
+	}
+		
 }

@@ -23,6 +23,7 @@
  *
  */
 
+
 class CVue { 
     // 1、数据响应化
     constructor(options) {
