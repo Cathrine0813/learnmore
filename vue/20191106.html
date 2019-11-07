@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ujietf-8">
+		<title></title>
+	</head>
+	<body>
+		/*
+		
+			编译生成render => 后面会被调用 => 触发依赖收集
+			
+			异步更新：
+				dep.notify => watcher.updata
+				
+				
+			patch()=>patchVnode()=>
+			节点、属性、子元素更新
+			
+			vue2增加了虚拟DOM,用户只需编写html
+			
+			编译器：compiler.js
+				1|解析-parse:将模板编译成AST，核心parseHtml
+				2|优化：标记静态节点（最少两层节点； 最外层为静态根节点）
+				3|加工：
+				
+			三个全局方法：component、filter、directive
+			
+			
+			render 调用 createElement方法
+			
+			
+			组件创建：自上而下
+			组件挂载：自下而上
+			
+			
+			思考题：
+			v-model
+		
+		*/
+	</body>
+</html>
