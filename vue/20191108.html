@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		/*
+			组件化过程：
+			1、组件的声明、注册：Vue.component('comp',{})
+			2、组件实例化和挂载：
+				-createComponent()  [create-component.js]:获取组件的虚拟DOM（vnode）
+				-createComponent()  [patch.js]:用初始化钩子实例化并加载
+				
+			v-model原理：
+			1、input: <input v-model="foo" />
+				-domProps:value值的赋值
+				-on:事件监听
+			2、自定义组件：<comp v-model="foo"></comp>
+				model:{
+					prop:'',
+					event:''
+				}
+			
+			
+			输入时事件compositionstart、compositionend
+			
+			双向绑定的实现原理(类似的面试题)：
+			1、
+			2、比较方便，react没有
+			3、使用在表单元素
+			4、源码实现思路：先经过编译器,之后区别对待（原生input、封装的自定义组件），
+			
+			
+			vue-cli3:
+			1、vue.config.js:
+				
+				chainWebpack //使用链式操作
+			2、权限控制
+				- 不需要权限 constRoutes
+				- 需要权限 asvncRoutes
+			
+			查看規則：vue inspect -- rule [target]
+			
+			
+			不懂：
+			查找上下文require.context()
+			
+			直接引入：import '../../....'
+		
+		*/
+	</body>
+</html>

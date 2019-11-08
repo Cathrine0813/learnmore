@@ -19,9 +19,9 @@
 			vue2增加了虚拟DOM,用户只需编写html
 			
 			编译器：compiler.js
-				1|解析-parse:将模板编译成AST，核心parseHtml
-				2|优化：标记静态节点（最少两层节点； 最外层为静态根节点）
-				3|加工：
+				1|解析-parse:将模板编译成抽象语法树AST，核心parseHtml
+				2|优化-optimize：标记静态节点（最少两层节点； 最外层为静态根节点）
+				3|生成-generate：生成渲染函数，render函数代码字符串
 				
 			三个全局方法：component、filter、directive
 			
