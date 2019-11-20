@@ -4,6 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import './icons/index'
+import './permission'
 
 Vue.config.productionTip = false
 
