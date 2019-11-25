@@ -7,10 +7,14 @@ import permission from './modules/permission'
 
 Vue.use(Vuex);
 
+// 全局设置
 export default new Vuex.Store({
   // 模块注册
   modules: {
     count,user,permission
+  },
+  getters: {
+    roles:state => state.user.roles
   }
 });
 
