@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+// 这样子也苹果和windows通用的，就算不通用，内部的api回对它进行调整，只需要执行npm link就好的
+
+// console.log('cli...') // 直接kkb可以输出
+
+// 定制commander工具
+const program = require('commander')
+const { init, reflesh } = require('../lib/api') // api里面有下载项目
+program.version(require('../package').version) // 版本号,终端使用kkb -V 可输出
+
+// 初始化工具,kkb init <name>
+program
+    .command('init <name>')  // name是参数,创建的文件名
+    .description('init project')
+    .action(init)
+    // .action(name => {   //执行一个函数
+    //     console.log('init '+ name)
+    // })
+
+// 自动增加路由 kkb refrash
+program
+    .command('refresh')
+    .description('refresh routers ...')
+    .action(reflesh)
+
+// console.log(process.argv) // process.argv：执行nodejs时候的参数
+program.parse(process.argv) // 这句是固定的，因为commander这个包都要解析process.argv里面的东西做的；
