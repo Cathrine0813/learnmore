@@ -29,6 +29,7 @@ const fs = require('fs')
 const server = http.createServer((request, response) => {
     const { url, method, headers } = request
 
+    // 静态页面
     if (url === '/' && method === 'GET') {
         // 很多人访问服务器的时候就需要用异步去写
         fs.readFile('index.html', (err, data) => {
@@ -45,6 +46,7 @@ const server = http.createServer((request, response) => {
         })
     }
 
+    // 接口
     else if (url === '/user' && method === 'GET') {
         response.writeHead(200, { 'Content-Type': 'application/json' })
         response.end(JSON.stringify({ name:'小星星'}))
@@ -54,7 +56,7 @@ const server = http.createServer((request, response) => {
      * accept:指发送端（客户端）希望接受的数据类型
      * Content-Type:指发送端（客户端|服务器）发送的实体数据的数据类型
      */
-    // 接收一个流,图片资源        
+    // 文件服务：接收一个流,图片资源        
     else if (method === 'GET' && headers.accept.includes('image/*') !== -1) {
         // 为什么'.' + 因为在index.html中的image标签中的src是img.png，需要找到对应的文件目录
         fs.createReadStream('.' + url).pipe(response)
