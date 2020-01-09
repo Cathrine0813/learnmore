@@ -1,10 +1,15 @@
 <!--axios请求-->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
-<script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<!--1\2\3-->
+<!--<script>
     // 使用匿名函数执行async/await语法
     (async () => {
 
-        axios.defaults.baseURL = 'http://localhost:4000' //到这里走的都是4000
+        // axios.defaults.baseURL = 'http://localhost:4000' //到这里走的都是4000
+        // ajax服务 ,默认情况下Ajax不带cookiesession这种模式，axios中要特殊声明一下withCredentials
+        axios.defaults.withCredentials = true //带上cookie
+
         const res = await axios.get("/api/users",{
             // 鉴权加一个token,自定义的请求头，触发预检请求options
             headers:{'X-Token':'ceshi'}
@@ -19,4 +24,17 @@
         // const img = new Image()
         // img.src = '/api/users?abc=123' //浏览器根据他的机制就会自动加载这个资源，可以不存在
     })()
-</script>
+</script>-->
+
+<!--Bodyparser-->
+<!--
+    get:参数放链接上
+    post:参数放body
+
+    form表单提交是一个刷新操作，不是无刷的
+-->
+<form action="/api/save" method="post"> 
+    <input type="text" name="abc" value="123"> 
+    <input type="text" name="efg" value="456"> 
+    <input type="submit" value="save"> 
+</form>
