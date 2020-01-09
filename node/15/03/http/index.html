@@ -1,0 +1,22 @@
+<!--axios请求-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+<script>
+    // 使用匿名函数执行async/await语法
+    (async () => {
+
+        axios.defaults.baseURL = 'http://localhost:4000' //到这里走的都是4000
+        const res = await axios.get("/api/users",{
+            // 鉴权加一个token,自定义的请求头，触发预检请求options
+            headers:{'X-Token':'ceshi'}
+        }) 
+        console.log('data', res.data) 
+
+        // 将返回的信息用document.writeln打印在页面上
+        document.writeln( `Response : ${JSON.stringify(res.data)}`)
+
+
+        // *埋点（可以不使用axios，这种方式特别轻量，不用加载任何包就可以完成，百度流量统计等都是这个原理）
+        // const img = new Image()
+        // img.src = '/api/users?abc=123' //浏览器根据他的机制就会自动加载这个资源，可以不存在
+    })()
+</script>

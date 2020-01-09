@@ -17,9 +17,44 @@ const app = new KKB()
 //     res.writeHead(200)
 //     res.end('hi kkb')
 // })
-app.use(ctx => {
-    ctx.body = 'hehe'
-})
+// app.use(ctx => {
+//     ctx.body = 'hehe'
+// })
+
+// static的实现
+const static = require('./static')
+app.use(static(__dirname+'/public'))
+
+// router的实现
+const Router = require('./router')
+const router = new Router();
+
+router.get('/index', async ctx => { ctx.body = 'index page';});
+router.get('/post', async ctx => {ctx.body = 'post page';});
+router.get('/list', async ctx => {ctx.body = 'list page';});
+router.post('/index', async ctx => { ctx.body = 'post page'; });
+// 路由实例输出父中间件 router.routes()；routes()的返回值是一个中间件，所以需要挂载method到ctx之上，修改request.js
+app.use(router.routes())
+
+app.use(async (ctx, next) => {
+    ctx.body = "1";
+    await next();
+    ctx.body += "5";
+});
+app.use(async (ctx, next) => {
+    ctx.body += "2";
+    await delay();
+    await next();
+    ctx.body += "4";
+});
+app.use(async (ctx, next) => {
+    ctx.body += "3";
+});
+const delay = () => Promise.resolve(resolve => setTimeout(() => resolve(), 2000));
+
+
+// 作业缓存
+const Homework = require('./homework')
 
 app.listen(3000, () => {
     console.log('监听端口3000')

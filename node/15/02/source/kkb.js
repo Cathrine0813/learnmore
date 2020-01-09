@@ -6,15 +6,23 @@ const response = require('./response')
 
 
 class KKB {
-
+    constructor() {
+        this.middlewares = []
+    }
     // 监听端口
     listen(...args) {
-        const server = http.createServer((req, res) => {
+        const server = http.createServer(async (req, res) => {
             // this.callback(req, res)
             
             // 创建上下文
             let ctx = this.createContext(req, res)
-            this.callback(ctx)
+
+            // 中间件合成
+            const fn = this.compose(this.middlewares)
+            // 执行合成函数
+            await fn(ctx) //异步使用await
+
+            // this.callback(ctx)
 
             // 处理响应
             res.end(ctx.body)
@@ -23,8 +31,11 @@ class KKB {
     }
 
     // 参数是回调函数
-    use(callback) {
-        this.callback = callback
+    // use(callback) {
+    //     this.callback = callback
+    // }
+    use(middleware) {
+        this.middlewares.push(middleware)
     }
 
     // 构建上下文,将原始的http的request和response加载进来
@@ -41,6 +52,26 @@ class KKB {
         // 上下文构建结束
         return ctx
     }
+
+    // 合成函数
+    compose(middlewares) {
+        return function (ctx) {
+            return dispatch(0) 
+            function dispatch(i) {
+                let fn = middlewares[i]
+
+                if (!fn) {
+                    return Promise.resolve()
+                }
+
+                return Promise.resolve(
+                    fn(ctx, function next() {
+                        return dispatch(i + 1) 
+                    })
+                )
+            }
+        }
+    }    
 }
 
 module.exports = KKB
