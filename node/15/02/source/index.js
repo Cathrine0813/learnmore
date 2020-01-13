@@ -29,6 +29,30 @@ app.use(static(__dirname+'/public'))
 const Router = require('./router')
 const router = new Router();
 
+// 作业缓存
+// const Homework = require('./homework')
+
+// let today_data = '', time = ''
+// router.get('/api/data', async ctx => {
+//     timeFilter()
+//     console.log(333,today_data)
+//     ctx.body =today_data.toString();
+// });
+
+// const timeFilter = () => {
+//     let data = new Date()
+
+//     let times = `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`
+
+//     if (time != times){
+//         today_data = times
+//         time = times
+//         console.log(111)
+//     }
+//     console.log(222,today_data,time)   
+    
+// }
+
 router.get('/index', async ctx => { ctx.body = 'index page';});
 router.get('/post', async ctx => {ctx.body = 'post page';});
 router.get('/list', async ctx => {ctx.body = 'list page';});
@@ -53,8 +77,7 @@ app.use(async (ctx, next) => {
 const delay = () => Promise.resolve(resolve => setTimeout(() => resolve(), 2000));
 
 
-// 作业缓存
-const Homework = require('./homework')
+
 
 app.listen(3000, () => {
     console.log('监听端口3000')
