@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--依赖js头部引入-->
+    <script></script>
+</head>
+<body>
+    <div></div>
+    <!--业务js底部引入-->
+    <script></script>
+    
+    <!--
+        mac：打开软件code .
+
+        建立项目：
+            1、初始化cnpm init -y
+            
+    -->
+
+
+
+    <!-- 
+        开发工程问题：
+            模块化 -> 兼容性有问题
+            样式css -> 预编译处理sass less postcss，但是不能直接在浏览器进行解析，使用loader处理
+            js -> es6 es7 ...新特性，部分浏览器不兼容，使用Babel处理
+            单元测试
+            开发规范 -> css命名，js开发规范，保持代码开发风格的一致性
+            代码压缩 -> 体积小，没有注释，没有冗余代码
+
+        使用构建工具完成这些事情
+     -->
+
+    <!-- 
+        不建议全局安装
+
+        webpack到4.0之后要安装webpack-cli：目的：解偶
+        webpack默认只支持js、json格式
+    
+        npx webpack 
+        npm run dev
+        ./node_modules/.bin/webpack
+    -->
+
+    <!-- 
+        webpack构建工具不适合用来构建框架，更适合开发环境到配置
+        构建框架更建议使用glup
+
+
+        mode：（构建模式：none development production）
+
+        entry：（一个入口一个chunk）
+        单页面应用（spa）【使用字符串、数组（数组做到是集成）】
+        多页面应用（mpa）【使用对象】
+
+        output：（用的是绝对路径）
+        输出文件名【使用占位符和哈希】
+
+        module{
+            rule:[]
+        }
+     -->
+
+
+
+</body>
+</html>

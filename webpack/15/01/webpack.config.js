@@ -34,19 +34,19 @@ module.exports = {
                 //     option: {}
                 // }]
             },
-            {
-                test: /\.(png|jpe?g|gif)$/, //图片 png jpg 
-                use: {
-                    loader: "file-loader", //把文件挪到输出目录里面，相当于copy
-                    // 写参数与配置
-                    option: {
-                        // 输出的文件名称[name]：原来的名字是什么输出的就是什么 [ext]：原来的后缀是什么输出的也是什么
-                        // name: '[name].[ext]',
-                        name: '[name]_[hash:6].[ext]',
-                        outputPath:'images/' // 输出到的目录
-                    }
-                }
-            }
+            // {
+            //     test: /\.(png|jpe?g|gif)$/, //图片 png jpg 
+            //     use: {
+            //         loader: "file-loader", //把文件挪到输出目录里面，相当于copy
+            //         // 写参数与配置
+            //         option: {
+            //             // 输出的文件名称[name]：原来的名字是什么输出的就是什么 [ext]：原来的后缀是什么输出的也是什么
+            //             // name: '[name].[ext]',
+            //             name: '[name]_[hash:6].[ext]',
+            //             outputPath:'images/' // 输出到的目录
+            //         }
+            //     }
+            // }
         ]
     }
 }
