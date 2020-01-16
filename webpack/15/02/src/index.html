@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <!--<title>Document</title>-->
+    <!--HtmlWebpackPlugin默认支持ejs模块引擎写法，要使用web变量就要使用ejs的写法-->
+    <title><%=  htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
     <div id="root"></div>
-    <p>别跟我</p>
-    <script src="./main_a1c13f.js"></script>
+
 </body>
 </html>
