@@ -1,3 +1,7 @@
 body{
     background-color: lightblue;
 }
+
+div:nth-of-type(odd) {
+    background: lightcoral; 
+}
