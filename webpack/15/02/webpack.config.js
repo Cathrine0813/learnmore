@@ -45,6 +45,18 @@ module.exports = {
                         name:"[name].[ext]"
                     }
                 }
+            },
+            // js
+            {
+                test: /\.js$/,
+                use: {
+                    loader: "babel-loader",
+                    exclude: /node_modules/,
+                    // options: {  // 在.babelrc中配置
+                    //     //用@babel/preset-env规范进行代码输出
+                    //     presets: ['@babel/preset-env']
+                    // }
+                }
             }
         ]
     },
