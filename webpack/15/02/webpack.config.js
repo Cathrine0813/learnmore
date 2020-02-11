@@ -5,8 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // 抽离css为独立文件
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-
-
 const webpack = require("webpack");
 
 module.exports = {
@@ -51,11 +49,11 @@ module.exports = {
                 test: /\.js$/,
                 use: {
                     loader: "babel-loader",
-                    exclude: /node_modules/,
-                    // options: {  // 在.babelrc中配置
-                    //     //用@babel/preset-env规范进行代码输出
-                    //     presets: ['@babel/preset-env']
-                    // }
+                    // exclude: /node_modules/,
+                    options: {  // 在.babelrc中配置
+                        //用@babel/preset-env规范进行代码输出
+                        presets: ['@babel/preset-env']
+                    }
                 }
             }
         ]
