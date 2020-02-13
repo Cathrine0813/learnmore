@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        plugins
+        webpack打包过程中的钩子
+        html-webpack-plugin（生成）
+        clean-webpack-plugin（清除dist目录）（插件比脚本快）（推荐使用插件完成打包的生命周期）
+        mini-css-extract-plugin（生成独立的css文件）
+        
+        -------------------------
+        
+        ejs模版引擎写法
+        pug
+
+        -------------------------
+
+        sourceMap
+        .map文件，源文件和生成的文件映射、定位代码
+
+        devtool:none（production默认）  source-map（mode是development默认的devtool是source-map）
+    
+        -------------------------
+
+        hash：每次构建都改变hash
+        contenthash: 内容不变哈希值不变，css建议使用contenthash，用户缓存使用
+        chunkhash：
+
+        -------------------------
+
+        一个入口一个chunk，一个chunk不一定只有一个依赖
+        webpack5.x减少chunk、hash都概念
+
+        -------------------------
+
+        WebpackDevServer:建立本地服务器
+        运行在物理运行目录中，没有dist目录，而且默认打开浏览器（index.html）
+        
+
+        热更新不支持抽离出来的css
+    -->
+</body>
+</html>
