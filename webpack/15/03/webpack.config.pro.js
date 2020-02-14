@@ -104,7 +104,26 @@ const proConfig = {
     optimization: {
         //只要mode是production就会⽣效，develpoment不⽣效的，因为webpack为了⽅便你的调试
         //但是mode是develpoment的时候会用注释的形式告诉我们哪些代码是没有使用到的
-        usedExports:true  //开始js tree shaking, 哪些导出import的模块被使⽤了，再做打包
+        usedExports:true,  //开始js tree shaking, 哪些导出import的模块被使⽤了，再做打包
+        // 代码分割
+        splitChunks: {
+            chunks: 'all', //all:所有代码都进行分割
+            // 设置缓存组，例如将lodash分割出来
+            cacheGroups: {
+                lodash: {
+                    chunks: 'all',//缓存组里的chunks只支持同步的async，可以设置成all
+                    test: /\lodash/,//正则匹配
+                    name: 'lodash',
+                    minSize: 30000,//30kb
+                    minChunks: 1,//最少被引用过一次
+                },
+                // // 默认,设置了会将默认的vendors输出改成了default的
+                // default: {
+                    
+                // }
+            }
+            
+        }
     },
     // 引入对应的插件，之后再plugins中进行实例化
     plugins: [

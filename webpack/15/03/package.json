@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.less",
+    "*.png"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack",
@@ -44,6 +47,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.3",
+    "lodash": "^4.17.15",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   }
