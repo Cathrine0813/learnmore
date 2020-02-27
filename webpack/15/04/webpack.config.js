@@ -9,6 +9,18 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const webpack = require("webpack");
 
+// 1、dll缓存
+// const { DllReferencePlugin } = require("webpack"); //DllReferencePlugin使用dll缓存
+// const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin') //往html插入资源
+// 2、hardsourcewebpackplugin缓存
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+// 3、happypack使用
+const HappyPack = require('happypack')
+const os = require('os')
+const happyThreadPool = HappyPack.ThreadPool({
+    size: os.cpus().length
+})
+
 // 合并配置
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base.js')
@@ -29,9 +41,18 @@ const devConfig ={
                 test: /\.css$/,
                 include: path.resolve(__dirname,'./src'),//优化搜索文件：指定搜索范围
                 // exclude: path.resolve(__dirname, './node_modules'),// 排除
-                use: ['style-loader', 'css-loader'] //用了MiniCssExtractPlugin就不能使用style-loader
+                // use: ['style-loader', 'css-loader'] //用了MiniCssExtractPlugin就不能使用style-loader
                 // use: [MiniCssExtractPlugin.loader, 'css-loader']
                 //MiniCssExtractPlugin.loader是MiniCssExtractPlugin自带的loader，是将css以文件的形式输出的
+            
+                // 使用happypack时
+                use: [
+                    {
+                        //  ⼀个loader对应⼀个id
+                        loader:'happypack/loader?id=css',//固定写法，id对应插件使用时建立的id
+                    }
+                ]
+
             },
             {
                 test: /\.less$/,
@@ -126,8 +147,32 @@ const devConfig ={
         //     // filename: "css/[name].css"
         //     filename: "css/[name]_[contenthash:6].css"
         // }),
+
+        // 使⽤构建好的动态链接库
+        // new DllReferencePlugin({
+        //     manifest:require('./dll/react-manifest.json')
+        // }),
+        // new DllReferencePlugin({
+        //     manifest:require('./dll/lodash-manifest.json')
+        // }),
+        // // 在html插入dll文件
+        // new AddAssetHtmlWebpackPlugin({
+        //     filepath: path.resolve( __dirname, './dll/react_dll.js') 
+        // }),
+        // new AddAssetHtmlWebpackPlugin({
+        //     filepath: path.resolve( __dirname, './dll/lodash_dll.js') 
+        // }),
+
+        new HardSourceWebpackPlugin(),
         // webpack自带的热模块更新插件,不⽀持抽离出的css 我们要使⽤css-loader
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+
+        new HappyPack({
+            id: 'css', //happypack/loader?id=css  与rules中loader中写的id对应
+            loaders: ['style-loader', 'css-loader'],
+            threadPool: happyThreadPool//共享子进程
+        })
+        
     ]
 }
 
