@@ -37,7 +37,7 @@ app.get('*', async (req, res) => {
     // 上下文对象：设置url和title两个重要参数 
     const context = {
         title: 'ssr test',
-        url: req.url //url，核心参数，首屏地址
+        url: req.url //url，核心参数，首屏地址，路由
     }
     const html = await renderer.renderToString(context);//renderToString将context传给main.js
     res.send(html)
