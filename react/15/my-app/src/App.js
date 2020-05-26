@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassComponent from './pages/ClassComponent';
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -22,7 +23,9 @@ function App() {
   //   </div>
   // );
 
-  return <div className="App">app</div>
+  return <div className="App">
+    <ClassComponent/>
+  </div>
 }
 
 export default App;
