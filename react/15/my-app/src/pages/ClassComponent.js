@@ -9,7 +9,24 @@ export default class ClassComponent extends Component{
             date:new Date()
         }
     }
-    // 生命
+    // ---------生命周期
+    // 组件挂载完成后
+    componentDidMount() {
+        this.timer = setInterval(() => {
+            this.setState({
+                date: new Date()
+            })
+        },1000)
+    }
+    // 组件更新
+    componentDidUpdate() {
+        
+    }
+    // 组件卸载之前
+    componentWillUnmount() {
+        clearInterval(this.timer)
+    }
+    // 渲染函数
     render() {
         const { date } = this.state;
 

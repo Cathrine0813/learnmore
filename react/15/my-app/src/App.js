@@ -1,5 +1,7 @@
 import React from 'react';
 import ClassComponent from './pages/ClassComponent';
+import { FunctionComponent } from './pages/FunctionComponent';
+import SetStatePage from './pages/SetStatePage';
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -24,7 +26,9 @@ function App() {
   // );
 
   return <div className="App">
-    <ClassComponent/>
+    <ClassComponent />
+    <FunctionComponent />
+    <SetStatePage />
   </div>
 }
 
