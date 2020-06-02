@@ -13,14 +13,28 @@ export default class SetStatePage extends Component{
         // this.changeValue(1)
 
         // 绑定事件
-        document.getElementById('test').addEventListener('click',this.setCounter)
+        document.getElementById('test').addEventListener('click',this.setCounter2)
     }
     changeValue = (v) => {
         // setState在合成事件和生命周期中是异步的，这里说的异步其实的批量更新，达到优化性能的目的
-        this.setState({
-            counter: this.state.counter + v
+        // this.setState({
+        //     counter: this.state.counter + v
+        // })
+        // console.log('counter :>> ', this.state.counter);
+
+        // 回调事件:更新后执行
+        // this.setState({
+        //     counter:this.state.counter + v
+        // }, () => {
+        //     console.log('counter :>> ', this.state.counter);
+        // })
+
+        // 函数,可以链式更新
+        this.setState((state) => {
+            return {
+                counter: this.state.counter + v
+            }
         })
-        console.log('counter :>> ', this.state.counter);
     }
     setCounter = () => {
         this.changeValue(1)   
