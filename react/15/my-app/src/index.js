@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+// import store from './store/index'
 
 // 将App转成VDOM，之后渲染成真实DOM，再插入到root中
 ReactDOM.render(
@@ -17,6 +18,16 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+// // redux重新渲染组件
+// store.subscribe(() => {
+//   ReactDOM.render(
+//     <React.StrictMode>
+//       <App />
+//     </React.StrictMode>,
+//     document.getElementById('root')
+//   );
+// })
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
