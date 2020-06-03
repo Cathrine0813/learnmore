@@ -17,10 +17,20 @@ export default class LifeCyclePage extends Component{
         console.log('constructor');
     }
     // ----------生命周期
-    // 挂载前
-    componentWillMount() {
-        console.log('componentWillMount')
+    // 即将废弃的生命周期componentWillMount、componentWillReceiveProps、componentWillUpdate，
+    // 用getDerivedStateFromProps、getSnapshotBeforeUpdate替代
+    static getDerivedStateFromProps(props, state) {
+        console.log('getDerivedStateFromProps', props, state)
+        // return null  //返回一个对象则更新state，返回null则不更新任何内容
+
+        const { count } = state
+        return count > 5 ? { count:0 }: null
     }
+
+    // // 挂载前
+    // componentWillMount() {
+    //     console.log('componentWillMount')
+    // }
     // 挂载后
     componentDidMount() {
         console.log('componentDidMount')
@@ -33,13 +43,24 @@ export default class LifeCyclePage extends Component{
         // return true // true:可更新 false:不更新
         return count !== 3
     }
-    // 更新前
-    componentWillUpdate() {
-        console.log('componentWillUpdate')
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('getSnapshotBeforeUpdate', prevProps, prevState);
+        // return null
+        // getSnapshotBeforeUpdate() 在最近⼀次渲染输出（提交到 DOM 节点）之前调⽤。它使得组件能
+        // 在发⽣更改之前从 DOM 中捕获⼀些信息（例如，滚动位置）。此⽣命周期的任何返回值将作为参数传
+        // 递给 componentDidUpdate(prevProps, prevState, snapshot) 的snapshot
+        return {
+            msg:'我是getSnapshotBeforeUpdate'
+        }
     }
+    // // 更新前
+    // componentWillUpdate() {
+    //     console.log('componentWillUpdate')
+    // }
     // 更新后
-    componentDidUpdate() {
-        console.log('componentDidUpdate')
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('componentDidUpdate', prevProps, '-----', prevState, '-----', snapshot)
     }
     // 卸载前
     componentWillUnmount() {
@@ -77,22 +98,27 @@ export default class LifeCyclePage extends Component{
 
 // 子组件
 class Child extends Component{
-    // 挂载前
-    componentWillMount() {
-        console.log('Child componentWillMount')
+    
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('Child getSnapshotBeforeUpdate', prevProps, prevState);
+        return null
     }
+    // 挂载前
+    // componentWillMount() {
+    //     console.log('Child componentWillMount')
+    // }
     // 挂载后
     componentDidMount() {
         console.log('Child componentDidMount')
     }
-    // 接收props前
-    componentWillReceiveProps(nextProps) {
-        console.log('Child componentWillReceiveProps',nextProps)
-    }
-    // 更新前
-    componentWillUpdate() {
-        console.log('Child componentWillUpdate')
-    }
+    // // 接收props前
+    // componentWillReceiveProps(nextProps) {
+    //     console.log('Child componentWillReceiveProps',nextProps)
+    // }
+    // // 更新前
+    // componentWillUpdate() {
+    //     console.log('Child componentWillUpdate')
+    // }
     // 更新后
     componentDidUpdate() {
         console.log('Child componentDidUpdate')

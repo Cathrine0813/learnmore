@@ -1,8 +1,11 @@
 import React from 'react';
-import ClassComponent from './pages/ClassComponent';
-import { FunctionComponent } from './pages/FunctionComponent';
-import SetStatePage from './pages/SetStatePage';
-import LifeCyclePage from './pages/LifeCyclePage';
+import Card from './pages/Card';
+// import HomePage from './pages/HomePage';
+// import UserPage from './pages/UserPage';
+// import ClassComponent from './pages/ClassComponent';
+// import { FunctionComponent } from './pages/FunctionComponent';
+// import SetStatePage from './pages/SetStatePage';
+// import LifeCyclePage from './pages/LifeCyclePage';
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -29,8 +32,13 @@ function App() {
   return <div className="App">
     {/* <ClassComponent />
     <FunctionComponent />
-    <SetStatePage /> */}
-    <LifeCyclePage />
+    <SetStatePage />
+    <LifeCyclePage /> */}
+
+    {/* 组件复合 */}
+    {/* <HomePage /> */}
+    {/* <UserPage /> */}
+    <Card />
   </div>
 }
 
