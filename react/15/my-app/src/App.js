@@ -1,5 +1,4 @@
 import React from 'react';
-import ReduxPage from './pages/ReduxPage';
 // import ClassComponent from './pages/ClassComponent';
 // import { FunctionComponent } from './pages/FunctionComponent';
 // import SetStatePage from './pages/SetStatePage';
@@ -7,6 +6,13 @@ import ReduxPage from './pages/ReduxPage';
 // import HomePage from './pages/HomePage';
 // import UserPage from './pages/UserPage';
 // import Card from './pages/Card';
+// import ReduxPage from './pages/ReduxPage';
+// import ReactReduxPage from './pages/ReactReduxPage';
+// import RouterPage from './pages/RouterPage';
+// import PureComponentPage from './pages/PureComponentPage';
+// import HookPage from './pages/HookPage';
+// import CustomHookPage from './pages/CustomHookPage';
+import UseMemoPage from './pages/UseMemoPage';
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -42,7 +48,17 @@ function App() {
     {/* <Card /> */}
 
     {/* redux */}
-    <ReduxPage />
+    {/* <ReduxPage /> */}
+    {/* <ReactReduxPage /> */}
+    {/* <RouterPage /> */}
+
+    {/* <PureComponentPage /> */}
+
+    {/* <HookPage /> */}
+    {/* <CustomHookPage /> */}
+    <UseMemoPage />
+    
+    
     
   </div>
 }

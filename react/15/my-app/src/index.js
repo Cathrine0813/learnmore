@@ -9,13 +9,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// import store from './store/index'
+import store from './store/index'
+import { Provider } from 'react-redux';
 
 // 将App转成VDOM，之后渲染成真实DOM，再插入到root中
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App/>
+    </Provider>
   </React.StrictMode>,
+  // <App/>,
   document.getElementById('root')
 );
 
