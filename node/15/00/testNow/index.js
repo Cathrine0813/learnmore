@@ -68,8 +68,7 @@ test('${'TEST ' + methodName}',()=>{
             // 排除测试代码 spec.js
             .filter(v => v.indexOf('.spec') === -1)
             // 执行生成文件函数
-            .map(v=>this.getTestFile(v))
-        
+            .map(v => this.getTestFile(v))
     }
 
     getTestFile(filename) {
